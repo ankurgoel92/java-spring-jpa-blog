@@ -1,36 +1,46 @@
 package com.pluralsight.blog.model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-
+@Entity
 public class Category {
 
-    private Long id;
-    private String name;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  private Long id;
+  private String name;
 
-    public Category() {
-        super();
-    }
+  @OneToMany
+  private List<Post> posts;
 
-    public Long getId() {
-        return id;
-    }
+  public Category() {
+    super();
+    posts = new ArrayList<>();
+  }
 
-    public String getName() {
-        return name;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public List<Post> getPosts() {
-        return null;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void addPost(Post post) {
-        return;
-    }
+  public List<Post> getPosts() {
+    return posts;
+  }
+
+  public void addPost(Post post) {
+    posts.add(post);
+  }
 }
