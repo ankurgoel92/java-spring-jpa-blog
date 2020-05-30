@@ -1,83 +1,98 @@
 package com.pluralsight.blog.model;
 
-import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-
+@Entity
 public class Post {
-    private Long id;
-    private String title;
-    private String lead;
-    private String body;
-    private String author;
-    private Date date;
 
-    public Post() {
-        super();
-    }
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  private Long id;
+  private String title;
+  private String lead;
+  
+  @Lob
+  @Column(length = 1000000)
+  private String body;
+  private String author;
+  
+  @Temporal(TemporalType.DATE)
+  private Date date;
 
-    public Post(Long id, String title, String lead, String body, String author, Date date) {
-        this();
-        this.id = id;
-        this.title = title;
-        this.lead = lead;
-        this.body = body;
-        this.author = author;
-        this.date = date;
-    }
+  public Post() {
+    super();
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Post(Long id, String title, String lead, String body, String author, Date date) {
+    this();
+    this.id = id;
+    this.title = title;
+    this.lead = lead;
+    this.body = body;
+    this.author = author;
+    this.date = date;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getLead() {
-        return lead;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setLead(String lead) {
-        this.lead = lead;
-    }
+  public String getLead() {
+    return lead;
+  }
 
-    public String getBody() {
-        return body;
-    }
+  public void setLead(String lead) {
+    this.lead = lead;
+  }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+  public String getBody() {
+    return body;
+  }
 
-    public String getAuthor() {
-        return author;
-    }
+  public void setBody(String body) {
+    this.body = body;
+  }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+  public String getAuthor() {
+    return author;
+  }
 
-    public Date getDate() {
-        return date;
-    }
+  public void setAuthor(String author) {
+    this.author = author;
+  }
 
-    public String getDateStr() {
-        DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
-        return outputFormatter.format(this.date);
-    }
+  public Date getDate() {
+    return date;
+  }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+  public String getDateStr() {
+    DateFormat outputFormatter = new SimpleDateFormat("MM/dd/yyyy");
+    return outputFormatter.format(this.date);
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
+  }
 }
